@@ -1,4 +1,4 @@
-package com.lance.cache.redis;
+package com.zc.springboottest.cache.redis;
 
 import java.io.Serializable;
 
