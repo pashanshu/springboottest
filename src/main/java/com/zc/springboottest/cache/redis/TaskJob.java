@@ -27,7 +27,7 @@ public class TaskJob {
 		String city = find(index);
 		CityInfo info = cityService.getCity(index, city);
 		
-		logger.info("city: {}", JSON.toJSONString(info));
+//		logger.info("city: {}", JSON.toJSONString(info));
 	}
 
 	private String find(int index) {
