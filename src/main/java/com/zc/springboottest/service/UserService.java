@@ -2,18 +2,15 @@ package com.zc.springboottest.service;
 
 import java.util.List;
 
-import com.zc.springboottest.entity.UserEntity;
+import com.zc.springboottest.model.UserInfo;
 
 public interface UserService {
+
 	/**
-	 * 查询所有的User对象
+	 * findAll
 	 * @return
 	 */
-	List<UserEntity> findAll();
+	List<UserInfo> findAll();
 	
-	/**
-	 * save user
-	 * @param user
-	 */
-	void save(UserEntity user) ;
+	UserInfo findOne(int id);
 }

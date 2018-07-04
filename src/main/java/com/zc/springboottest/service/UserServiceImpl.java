@@ -2,34 +2,33 @@ package com.zc.springboottest.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.zc.springboottest.entity.AddressEntity;
-import com.zc.springboottest.entity.UserEntity;
-import com.zc.springboottest.repository.UserRepository;
+import com.zc.springboottest.mapper.UserMapper;
+import com.zc.springboottest.model.UserInfo;
 
 @Service
-public class UserServiceImpl implements UserService{
+@CacheConfig(cacheNames="userService")
+public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserRepository userRepository;
-	
-	/**
-	 * 查询所有的User对象
-	 * @return
-	 */
-	public List<UserEntity> findAll(){
-		return userRepository.findAll();
+	private UserMapper userMapper;
+	Logger logger = LogManager.getLogger(getClass());
+
+	@Override
+	@Cacheable
+	public List<UserInfo> findAll() {
+		logger.info("we use database,not redis");
+		return userMapper.findAll();
 	}
-	
-	/**
-	 * save user
-	 * @param user
-	 */
-	public void save(UserEntity user) {
-		for(AddressEntity address: user.getAddresses()) {
-			address.setUser(user);
-		}
-		userRepository.save(user);
+
+	@Override
+	public UserInfo findOne(int id) {
+		return userMapper.findOne(id);
 	}
+
 }
