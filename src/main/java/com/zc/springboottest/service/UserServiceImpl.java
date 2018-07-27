@@ -9,7 +9,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.zc.springboottest.mapper.UserMapper;
+import com.zc.springboottest.annotation.DbLog;
+import com.zc.springboottest.dao.UserMapper;
 import com.zc.springboottest.model.UserInfo;
 
 @Service
@@ -20,7 +21,8 @@ public class UserServiceImpl implements UserService {
 	Logger logger = LogManager.getLogger(getClass());
 
 	@Override
-	@Cacheable
+//	@Cacheable
+//	@DbLog
 	public List<UserInfo> findAll() {
 		logger.info("we use database,not redis");
 		return userMapper.findAll();
